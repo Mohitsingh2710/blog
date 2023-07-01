@@ -4,13 +4,16 @@ var bodyParser = require('body-parser')
 const ArticleRouter=require("./routes/article");
 const Article=require('./models/article');
 const methodOverride=require('method-override');
+require('dotenv').config();
 const app = express()
 const port = 3000
-
+const URL=process.env.MONGO_CONNECTION_URL;
 main().catch(err => console.log(err));
 
+console.log(URL);
+
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/blogarticle?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.0'); 
+  await mongoose.connect(URL); 
 }
 
 app.set('view engine', 'ejs')
